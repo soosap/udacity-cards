@@ -12,9 +12,11 @@ class IndividualDeckView extends React.Component<Props, State> {
   state = {};
 
   render() {
-    <Wrapper>
-      <Text>IndividualDeckView</Text>
-    </Wrapper>
+    return (
+      <Wrapper>
+        <Text>IndividualDeckView</Text>
+      </Wrapper>
+    );
   }
 }
 

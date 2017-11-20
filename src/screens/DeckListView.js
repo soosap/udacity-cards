@@ -1,6 +1,9 @@
 /* @flow */
 import * as React from 'react';
 import styled from 'styled-components/native';
+import { connect } from 'react-redux';
+
+import * as actions from '../actions';
 
 const Wrapper = styled.View``;
 const Text = styled.Text``;
@@ -12,10 +15,19 @@ class DeckListView extends React.Component<Props, State> {
   state = {};
 
   render() {
-    <Wrapper>
-      <Text>DeckListView</Text>
-    </Wrapper>
+    return (
+      <Wrapper>
+        <Text>DeckListView</Text>
+      </Wrapper>
+    );
   }
 }
 
-export { DeckListView };
+const mapStateToProps = state => {
+  return {
+    decks: state.decks,
+  };
+};
+
+
+export default connect(mapStateToProps, actions)(DeckListView);

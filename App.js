@@ -1,15 +1,41 @@
+/* @flow */
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux';
+import { TabNavigator } from 'react-navigation';
+import { createStore, applyMiddleware } from 'redux';
+import reduxThunk from 'redux-thunk';
 
+import { DeckListView, NewDeckView } from './src/screens';
+import reducers from './src/reducers';
 
-export default class App extends React.Component {
+const Tabs = TabNavigator({
+  DeckListView: {
+    screen: DeckListView,
+    navigationOptions: () => ({
+      title: 'DECKS',
+    }),
+  },
+  NewDeckView: {
+    screen: NewDeckView,
+    navigationOptions: () => ({
+      title: 'NEW DECK',
+    }),
+  },
+});
+
+const middleware = [reduxThunk];
+const store = createStore(reducers, applyMiddleware(...middleware));
+
+type Props = {};
+type State = {};
+
+export default class App extends React.Component<Props, State> {
   render() {
     return (
-      <View>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <Provider store={store}>
+        <Tabs />
+      </Provider>
     );
   }
 }

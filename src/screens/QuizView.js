@@ -12,9 +12,11 @@ class QuizView extends React.Component<Props, State> {
   state = {};
 
   render() {
-    <Wrapper>
-      <Text>QuizView</Text>
-    </Wrapper>
+    return (
+      <Wrapper>
+        <Text>QuizView</Text>
+      </Wrapper>
+    );
   }
 }
 

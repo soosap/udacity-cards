@@ -12,9 +12,11 @@ class NewDeckView extends React.Component<Props, State> {
   state = {};
 
   render() {
-    <Wrapper>
-      <Text>NewDeckView</Text>
-    </Wrapper>
+    return (
+      <Wrapper>
+        <Text>NewDeckView</Text>
+      </Wrapper>
+    );
   }
 }
 

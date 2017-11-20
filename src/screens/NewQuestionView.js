@@ -12,9 +12,11 @@ class NewQuestionView extends React.Component<Props, State> {
   state = {};
 
   render() {
-    <Wrapper>
-      <Text>NewQuestionView</Text>
-    </Wrapper>
+    return (
+      <Wrapper>
+        <Text>NewQuestionView</Text>
+      </Wrapper>
+    );
   }
 }
 
