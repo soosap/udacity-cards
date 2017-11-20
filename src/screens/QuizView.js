@@ -20,4 +20,4 @@ class QuizView extends React.Component<Props, State> {
   }
 }
 
-export { QuizView };
+export default QuizView;

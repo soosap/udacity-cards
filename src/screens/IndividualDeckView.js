@@ -20,4 +20,4 @@ class IndividualDeckView extends React.Component<Props, State> {
   }
 }
 
-export { IndividualDeckView };
+export default IndividualDeckView;

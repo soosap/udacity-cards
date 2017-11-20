@@ -20,4 +20,4 @@ class NewQuestionView extends React.Component<Props, State> {
   }
 }
 
-export { NewQuestionView };
+export default NewQuestionView;

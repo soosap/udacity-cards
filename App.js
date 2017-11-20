@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
 import { TabNavigator } from 'react-navigation';
 import { createStore, applyMiddleware } from 'redux';
@@ -34,7 +34,10 @@ export default class App extends React.Component<Props, State> {
   render() {
     return (
       <Provider store={store}>
-        <Tabs />
+        <View>
+          <StatusBar barStyle="light-content" />
+          <Tabs />
+        </View>
       </Provider>
     );
   }
