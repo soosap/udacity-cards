@@ -34,10 +34,7 @@ export default class App extends React.Component<Props, State> {
   render() {
     return (
       <Provider store={store}>
-        <View>
-          <StatusBar barStyle="light-content" />
-          <Tabs />
-        </View>
+        <Tabs />
       </Provider>
     );
   }

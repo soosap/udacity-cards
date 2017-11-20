@@ -32,13 +32,18 @@ class NewDeckView extends React.Component<Props, State> {
     title: '',
   };
 
-  handleSubmit = () => { console.log('submitting...'); };
+  handleSubmit = () => {
+    console.log('submitting...', this.state.title);
+  };
 
   render() {
     return (
       <Wrapper behavior="padding">
         <Text>What is the title of your new deck?</Text>
-        <TextInput placeholder="Deck Title" />
+        <TextInput
+          placeholder="Deck Title"
+          onTextChange={text => this.setState({ title: text })}
+        />
         <ButtonWrapper>
           <Button onPress={this.handleSubmit}>Submit</Button>
         </ButtonWrapper>

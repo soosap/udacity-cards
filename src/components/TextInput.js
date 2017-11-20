@@ -10,31 +10,19 @@ const Wrapper = styled.TextInput`
   border: 1px solid ${Color.BLACK};
   border-radius: 4px;
   padding: 5px;
-  margin-bottom: 5px; 
+  margin-bottom: 5px;
 `;
 
 type Props = {
   placeholder?: string,
+  value?: string,
 };
 
-type State = {
-  text: ?string,
-};
-
-class TextInput extends React.Component<Props, State> {
-  state = {
-    text: '',
-  };
-
-  render() {
-    return (
-      <Wrapper
-        onChangeText={text => this.setState({ text })}
-        value={this.state.text}
-        placeholder={this.props.placeholder}
-      />
-    );
-  }
-}
+const TextInput = ({ placeholder, value }: Props) => (
+  <Wrapper
+    value={value}
+    placeholder={placeholder}
+  />
+);
 
 export { TextInput };
