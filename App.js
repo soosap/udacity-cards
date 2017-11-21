@@ -41,13 +41,14 @@ const Tabs = TabNavigator({
         navigationOptions: () => ({
           title: 'NEW DECK',
           header: null,
+          headerBackTitle: null,
         }),
       },
       NewQuestionView: {
         screen: NewQuestionView,
         navigationOptions: () => ({
           title: 'Add Card',
-
+          tabBarVisible: false,
         }),
       },
     }),
