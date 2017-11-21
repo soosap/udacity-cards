@@ -3,13 +3,12 @@ import { AsyncStorage } from 'react-native';
 
 import type { Dispatch, Deck } from '../utils/types';
 
-export const fetchDecks = () => async (dispatch: Dispatch) => {
+export const fetchDeck = (title: $PropertyType<Deck, 'title'>) => async (
+  dispatch: Dispatch,
+) => {
   const decks: {
     [key: $PropertyType<Deck, 'title'>]: Deck,
   } = await AsyncStorage.getItem('decks');
 
-  dispatch({
-    type: 'FETCH_DECKS',
-    payload: decks,
-  });
+  dispatch({ type: 'FETCH_DECK', payload: decks[title] });
 };

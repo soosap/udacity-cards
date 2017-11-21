@@ -1,14 +1,33 @@
 /* @flow */
+export type Question = {
+  question: string,
+  answer: string,
+};
+
 export type Deck = {
   title: string,
+  questions: Array<Question>,
 };
 
 type FetchDecksAction = {
   type: 'FETCH_DECKS',
-  payload: Array<Deck>,
+  payload: { [key: $PropertyType<Deck, 'title'>]: Deck },
 };
 
-export type Action = FetchDecksAction;
+type FetchDeckAction = {
+  type: 'FETCH_DECK',
+  payload: Deck,
+};
+
+type SaveDeckTitleAction = {
+  type: 'SAVE_DECK_TITLE',
+};
+
+type AddCardToDeckAction = {
+  type: 'ADD_CARD_TO_DECK',
+};
+
+export type Action = FetchDecksAction | FetchDeckAction | SaveDeckTitleAction | AddCardToDeckAction;
 
 export type Dispatch = (action: Action | ThunkAction | PromiseAction) => any;
 // type GetState = () => State;
