@@ -6,6 +6,7 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 import { Constants } from 'expo';
+import styled from 'styled-components/native';
 
 import {
   DeckListView,
@@ -17,43 +18,41 @@ import reducers from './src/reducers';
 
 import { Color } from './src/utils';
 
-const Tabs = TabNavigator({
-  DeckListFlow: {
-    screen: StackNavigator({
-      DeckListView: {
-        screen: DeckListView,
-        navigationOptions: () => ({
-          title: 'DECKS',
-        }),
-      },
-      IndividualDeckView: {
-        screen: IndividualDeckView,
-        navigationOptions: ({ navigation }) => ({
-          headerTitle: navigation.state.params.title,
-        }),
-      },
-    }),
+const Tabs = TabNavigator(
+  {
+    DeckListFlow: {
+      screen: StackNavigator({
+        DeckListView: {
+          screen: DeckListView,
+        },
+        IndividualDeckView: {
+          screen: IndividualDeckView,
+          navigationOptions: ({ navigation }) => ({
+            headerTitle: navigation.state.params.title,
+          }),
+        },
+      }),
+    },
+    CreateDeckFlow: {
+      screen: StackNavigator(
+        {
+          NewDeckView: {
+            screen: NewDeckView,
+            navigationOptions: () => ({
+              title: 'New Deck',
+              header: null,
+              headerBackTitle: null,
+            }),
+          },
+          NewQuestionView: {
+            screen: NewQuestionView,
+          },
+        },
+        { headerMode: 'screen' },
+      ),
+    },
   },
-  CreateDeckFlow: {
-    screen: StackNavigator({
-      NewDeckView: {
-        screen: NewDeckView,
-        navigationOptions: () => ({
-          title: 'NEW DECK',
-          header: null,
-          headerBackTitle: null,
-        }),
-      },
-      NewQuestionView: {
-        screen: NewQuestionView,
-        navigationOptions: () => ({
-          title: 'Add Card',
-          tabBarVisible: false,
-        }),
-      },
-    }),
-  },
-});
+);
 
 const middleware = [reduxThunk];
 const store = createStore(
@@ -66,6 +65,15 @@ const store = createStore(
     : applyMiddleware(...middleware),
 );
 
+const StatusBarBackground = styled.View`
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f7f7f7;
+`;
+
 type Props = {};
 type State = {};
 
@@ -74,11 +82,9 @@ export default class App extends React.Component<Props, State> {
     return (
       <Provider store={store}>
         <View style={{ flex: 1 }}>
-          <View style={{ height: Constants.statusBarHeight }}>
-            <StatusBar
-              translucent
-              backgroundColor="blue"
-            />
+          <View style={{ height: Constants.statusBarHeight, position: 'relative' }}>
+            <StatusBar translucent barStyle="dark-content" />
+            <StatusBarBackground />
           </View>
           <Tabs />
         </View>
