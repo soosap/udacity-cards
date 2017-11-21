@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { TabNavigator } from 'react-navigation';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
+import { Constants } from 'expo';
 
 import { DeckListView, NewDeckView } from './src/screens';
 import reducers from './src/reducers';
@@ -42,7 +43,12 @@ export default class App extends React.Component<Props, State> {
   render() {
     return (
       <Provider store={store}>
-        <Tabs />
+        <View style={{ flex: 1 }}>
+          <View style={{ height: Constants.statusBarHeight }}>
+            <StatusBar translucent barStyle="light-content" />
+          </View>
+          <Tabs />
+        </View>
       </Provider>
     );
   }

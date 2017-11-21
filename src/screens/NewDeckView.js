@@ -46,7 +46,7 @@ class NewDeckView extends React.Component<Props, State> {
         <Text>What is the title of your new deck?</Text>
         <TextInput
           placeholder="Deck Title"
-          onTextChange={text => this.setState({ title: text })}
+          onChangeText={text => this.setState({ title: text })}
         />
         <ButtonWrapper>
           <Button onPress={this.handleSubmit}>Submit</Button>

@@ -16,12 +16,14 @@ const Wrapper = styled.TextInput`
 type Props = {
   placeholder?: string,
   value?: string,
+  onChangeText: () => void,
 };
 
-const TextInput = ({ placeholder, value }: Props) => (
+const TextInput = ({ placeholder, value, onChangeText }: Props) => (
   <Wrapper
     value={value}
     placeholder={placeholder}
+    onChangeText={onChangeText}
   />
 );
 
