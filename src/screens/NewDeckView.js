@@ -56,4 +56,4 @@ class NewDeckView extends React.Component<Props, State> {
   }
 }
 
-export default connect({}, actions)(NewDeckView);
+export default connect(null, actions)(NewDeckView);

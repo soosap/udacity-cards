@@ -25,7 +25,15 @@ const Tabs = TabNavigator({
 });
 
 const middleware = [reduxThunk];
-const store = createStore(reducers, applyMiddleware(...middleware));
+const store = createStore(
+  reducers,
+  process.env.NODE_ENV === 'development'
+    ? require('redux-devtools-extension').composeWithDevTools(
+        applyMiddleware(...middleware),
+        // other store enhancers if any
+      )
+    : applyMiddleware(...middleware),
+);
 
 type Props = {};
 type State = {};
