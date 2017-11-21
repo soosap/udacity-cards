@@ -21,10 +21,12 @@ type FetchDeckAction = {
 
 type SaveDeckTitleAction = {
   type: 'SAVE_DECK_TITLE',
+  payload: Deck,
 };
 
 type AddCardToDeckAction = {
   type: 'ADD_CARD_TO_DECK',
+  payload: Deck,
 };
 
 export type Action = FetchDecksAction | FetchDeckAction | SaveDeckTitleAction | AddCardToDeckAction;

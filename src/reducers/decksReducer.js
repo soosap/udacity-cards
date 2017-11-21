@@ -9,6 +9,12 @@ export default function(state: State = {}, action: Action) {
   switch (action.type) {
     case 'FETCH_DECKS':
       return action.payload;
+    case 'FETCH_DECK':
+      return { ...state, [action.payload.title]: action.payload };
+    case 'SAVE_DECK_TITLE':
+      return { ...state, [action.payload.title]: action.payload };
+    case 'ADD_CARD_TO_DECK':
+      return { ...state, [action.payload.title]: action.payload };
     default:
       return state;
   }

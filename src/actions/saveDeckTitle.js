@@ -11,5 +11,5 @@ export const saveDeckTitle = (title: $PropertyType<Deck, 'title'>) => async (
     [deck.title]: deck,
   }));
 
-  dispatch({ type: 'SAVE_DECK_TITLE' });
+  dispatch({ type: 'SAVE_DECK_TITLE', payload: deck });
 };

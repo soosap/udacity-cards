@@ -16,5 +16,5 @@ export const addCardToDeck = (title: $PropertyType<Deck, 'title'>, card: Questio
     }),
   );
 
-  dispatch({ type: 'ADD_CARD_TO_DECK' });
+  dispatch({ type: 'ADD_CARD_TO_DECK', payload: deck });
 };
