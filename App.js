@@ -2,25 +2,54 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 import { Constants } from 'expo';
 
-import { DeckListView, NewDeckView } from './src/screens';
+import {
+  DeckListView,
+  NewDeckView,
+  IndividualDeckView,
+  NewQuestionView,
+} from './src/screens';
 import reducers from './src/reducers';
 
+import { Color } from './src/utils';
+
 const Tabs = TabNavigator({
-  DeckListView: {
-    screen: DeckListView,
-    navigationOptions: () => ({
-      title: 'DECKS',
+  DeckListFlow: {
+    screen: StackNavigator({
+      DeckListView: {
+        screen: DeckListView,
+        navigationOptions: () => ({
+          title: 'DECKS',
+        }),
+      },
+      IndividualDeckView: {
+        screen: IndividualDeckView,
+        navigationOptions: ({ navigation }) => ({
+          headerTitle: navigation.state.params.title,
+        }),
+      },
     }),
   },
-  NewDeckView: {
-    screen: NewDeckView,
-    navigationOptions: () => ({
-      title: 'NEW DECK',
+  CreateDeckFlow: {
+    screen: StackNavigator({
+      NewDeckView: {
+        screen: NewDeckView,
+        navigationOptions: () => ({
+          title: 'NEW DECK',
+          header: null,
+        }),
+      },
+      NewQuestionView: {
+        screen: NewQuestionView,
+        navigationOptions: () => ({
+          title: 'Add Card',
+
+        }),
+      },
     }),
   },
 });
@@ -45,7 +74,10 @@ export default class App extends React.Component<Props, State> {
       <Provider store={store}>
         <View style={{ flex: 1 }}>
           <View style={{ height: Constants.statusBarHeight }}>
-            <StatusBar translucent barStyle="light-content" />
+            <StatusBar
+              translucent
+              backgroundColor="blue"
+            />
           </View>
           <Tabs />
         </View>

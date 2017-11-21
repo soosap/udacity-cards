@@ -26,18 +26,26 @@ const Text = styled.Text`
 
 type Props = {
   saveDeckTitle: (title: string) => void,
+  navigation: Object,
 };
 type State = {
   title: string,
 };
 
 class NewDeckView extends React.Component<Props, State> {
+  static navigationOptions = {
+    
+  };
+
   state = {
     title: '',
   };
 
   handleSubmit = () => {
     this.props.saveDeckTitle(this.state.title);
+
+    // Navigate user to NewQuestionView
+    this.props.navigation.navigate('NewQuestionView');
   };
 
   render() {

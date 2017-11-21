@@ -3,6 +3,6 @@ export const Color = {
   PRIMARY: 'yellow',
   SUCCESS: 'green',
   DANGER: 'red',
-  BLACK: 'black',
+  BLACK: '#000000',
   WHITE: 'white',
 };

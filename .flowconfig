@@ -30,6 +30,9 @@
 .*/node_modules/reqwest/.*
 .*/node_modules/xdl/.*
 
+; Ignore expo
+.*/node_modules/expo/.*
+
 ; Ignore expo dependencies
 
 ; Ignore Expo SDK + some of it's dependencies temporarily:
