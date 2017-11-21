@@ -1,8 +1,10 @@
 /* @flow */
 import * as React from 'react';
 import styled from 'styled-components/native';
+import { connect } from 'react-redux';
 
 import { TextInput, Button } from '../components';
+import * as actions from '../actions';
 
 const Wrapper = styled.KeyboardAvoidingView`
   flex: 1;
@@ -22,7 +24,9 @@ const Text = styled.Text`
   margin-bottom: 24px;
 `;
 
-type Props = {};
+type Props = {
+  saveDeckTitle: (title: string) => void,
+};
 type State = {
   title: string,
 };
@@ -33,7 +37,7 @@ class NewDeckView extends React.Component<Props, State> {
   };
 
   handleSubmit = () => {
-    console.log('submitting...', this.state.title);
+    this.props.saveDeckTitle(this.state.title);
   };
 
   render() {
@@ -52,4 +56,4 @@ class NewDeckView extends React.Component<Props, State> {
   }
 }
 
-export default NewDeckView;
+export default connect({}, actions)(NewDeckView);
