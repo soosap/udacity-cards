@@ -10,7 +10,14 @@ import type { Deck } from '../utils/types';
 
 const Wrapper = styled.View`
   align-items: center;
-  margin-top: 40px;
+  margin-top: 20px;
+`;
+
+const Remaining = styled.Text`
+  align-self: flex-start;
+  font-size: 20px;
+  margin-left: 25px;
+  margin-bottom: 20px;
 `;
 
 type NavigationState = {
@@ -59,6 +66,9 @@ class QuizView extends React.Component<Props, State> {
     const card = this.props.deck.questions[this.state.activeQuestionIndex];
     return (
       <Wrapper>
+        <Remaining>{`${this.props.deck.questions.length - this.state.activeQuestionIndex}/${
+          this.props.deck.questions.length
+        }`}</Remaining>
         <Headline>
           {this.state.answerRevealed ? card.answer : card.question}
         </Headline>
