@@ -14,6 +14,7 @@ import {
   IndividualDeckView,
   NewQuestionView,
   QuizView,
+  ScoreView,
 } from './src/screens';
 import reducers from './src/reducers';
 
@@ -33,6 +34,9 @@ const Tabs = TabNavigator({
       },
       QuizView: {
         screen: QuizView,
+      },
+      ScoreView: {
+        screen: ScoreView,
       },
     }),
   },

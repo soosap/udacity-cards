@@ -1,5 +1,6 @@
 /* @flow */
 import * as React from 'react';
+import * as R from 'ramda';
 import styled from 'styled-components/native';
 import { Constants } from 'expo';
 import { connect } from 'react-redux';
@@ -53,20 +54,46 @@ class QuizView extends React.Component<Props, State> {
   };
 
   toggleAnswerQuestionLink = () => {
-    this.setState(state => ({
-      answerRevealed: !state.answerRevealed,
-    }));
+    this.setState(
+      R.evolve({
+        answerRevealed: R.not,
+      }),
+    );
   };
 
   handleAnswer = (answer: boolean) => {
-    console.log('handling answer', answer);
+    const { activeQuestionIndex } = this.state;
+
+    if (answer) {
+      this.setState(
+        R.evolve({
+          correctAnswers: R.inc,
+          activeQuestionIndex: R.inc,
+        })}
+      );
+    } else {
+      this.setState(R.evolve({ activeQuestionIndex: R.inc }));
+    }
+
+    if (activeQuestionIndex + 1 === this.props.deck.questions.length) {
+      // last question
+      this.props.navigation.navigate('ScoreView', {
+        score: `${(
+          this.state.correctAnswers /
+          this.props.deck.questions.length *
+          100
+        ).toFixed(2)}%`,
+      });
+    }
   };
 
   render() {
     const card = this.props.deck.questions[this.state.activeQuestionIndex];
+    console.log('card', card);
     return (
       <Wrapper>
-        <Remaining>{`${this.props.deck.questions.length - this.state.activeQuestionIndex}/${
+        <Remaining>{`${this.props.deck.questions.length -
+          this.state.activeQuestionIndex}/${
           this.props.deck.questions.length
         }`}</Remaining>
         <Headline>
