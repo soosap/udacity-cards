@@ -34,11 +34,12 @@ class NewDeckView extends React.Component<Props, State> {
   };
 
   handleSubmit = () => {
-    this.props.saveDeckTitle(this.state.title);
+    const { title } = this.state;
+    this.props.saveDeckTitle(title);
 
-    this.props.navigation.navigate('NewQuestionView', {
-      title: this.state.title,
-    });
+    this.props.navigation.navigate('NewQuestionView', { title });
+
+    this.setState({ title: '' });
   };
 
   render() {

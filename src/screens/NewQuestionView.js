@@ -44,15 +44,17 @@ class NewQuestionView extends React.Component<Props, State> {
   };
 
   handleSubmit = () => {
-    this.props.addCardToDeck(this.props.navigation.state.params.title, {
-      question: this.state.question,
-      answer: this.state.answer,
-    });
+    if (this.state.question && this.state.answer) {
+      this.props.addCardToDeck(this.props.navigation.state.params.title, {
+        question: this.state.question,
+        answer: this.state.answer,
+      });
 
-    this.setState({
-      question: '',
-      answer: '',
-    });
+      this.setState({
+        question: '',
+        answer: '',
+      });
+    }
   };
 
   render() {
