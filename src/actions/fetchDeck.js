@@ -8,7 +8,7 @@ export const fetchDeck = (title: $PropertyType<Deck, 'title'>) => async (
 ) => {
   const decks: {
     [key: $PropertyType<Deck, 'title'>]: Deck,
-  } = await AsyncStorage.getItem('decks');
+  } = JSON.parse(await AsyncStorage.getItem('decks'));
 
   dispatch({ type: 'FETCH_DECK', payload: decks[title] });
 };

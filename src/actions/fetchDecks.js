@@ -6,7 +6,7 @@ import type { Dispatch, Deck } from '../utils/types';
 export const fetchDecks = () => async (dispatch: Dispatch) => {
   const decks: {
     [key: $PropertyType<Deck, 'title'>]: Deck,
-  } = await AsyncStorage.getItem('decks');
+  } = JSON.parse(await AsyncStorage.getItem('decks'));
 
   dispatch({
     type: 'FETCH_DECKS',
