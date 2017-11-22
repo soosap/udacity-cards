@@ -17,13 +17,15 @@ type Props = {
   placeholder?: string,
   value?: string,
   onChangeText: () => void,
+  style?: Object,
 };
 
-const TextInput = ({ placeholder, value, onChangeText }: Props) => (
+const TextInput = ({ placeholder, value, onChangeText, style }: Props) => (
   <Wrapper
     value={value}
     placeholder={placeholder}
     onChangeText={onChangeText}
+    style={style}
   />
 );
 

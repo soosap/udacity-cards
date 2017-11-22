@@ -33,9 +33,7 @@ type State = {
 };
 
 class NewDeckView extends React.Component<Props, State> {
-  static navigationOptions = {
-    
-  };
+  static navigationOptions = {};
 
   state = {
     title: '',
@@ -44,8 +42,9 @@ class NewDeckView extends React.Component<Props, State> {
   handleSubmit = () => {
     this.props.saveDeckTitle(this.state.title);
 
-    // Navigate user to NewQuestionView
-    this.props.navigation.navigate('NewQuestionView');
+    this.props.navigation.navigate('NewQuestionView', {
+      title: this.state.title,
+    });
   };
 
   render() {
