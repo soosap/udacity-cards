@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 import { Color } from '../utils';
 import type { Deck } from '../utils/types';
 
-const Wrapper = styled.View`
+const Wrapper = styled.TouchableOpacity`
   border: 1px solid ${Color.BLACK};
   height: 150px;
   margin: 10px;
@@ -13,6 +13,7 @@ const Wrapper = styled.View`
   border-radius: 3px;
   align-items: center;
   justify-content: center;
+  align-self: stretch;
 `;
 
 const Text = styled.Text`
@@ -25,13 +26,15 @@ const Description = styled.Text`
   color: ${Color.GRAY};
 `;
 
-const Card = ({ title, questions }: Deck) => {
+type Props = Deck & {
+  onPress?: () => void,
+};
+
+const Card = ({ title, questions, onPress }: Props) => {
   return (
-    <Wrapper>
+    <Wrapper onPress={onPress}>
       <Text>{title}</Text>
-      <Description>
-        {questions.length} cards
-      </Description>
+      <Description>{questions.length} cards</Description>
     </Wrapper>
   );
 };

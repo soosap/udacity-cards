@@ -5,29 +5,34 @@ import styled from 'styled-components/native';
 import { Color } from '../utils';
 
 const Wrapper = styled.TouchableOpacity`
-  background-color: ${Color.BLACK};
+  background-color: ${props => props.inverted ? 'transparent' : Color.BLACK};
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 5px;
+  border-width: ${props => props.inverted ? '1px' : '0'};
+  border-color: ${Color.BLACK};
 `;
 const Text = styled.Text`
-  color: ${Color.WHITE};
+  color: ${props => props.inverted ? Color.BLACK : Color.WHITE};
   font-size: 20px;
 `;
 
 type Props = {
   children: string,
-  onPress: () => void,
+  onPress?: () => void,
+  inverted: boolean,
 };
 
-const Button = ({ children, onPress }: Props) => {
+const Button = ({ children, onPress, inverted }: Props) => {
   return (
-    <Wrapper onPress={onPress}>
-      <Text>
-        {children}
-      </Text>
+    <Wrapper inverted={inverted} onPress={onPress}>
+      <Text inverted={inverted}>{children}</Text>
     </Wrapper>
   );
+};
+
+Button.defaultProps = {
+  inverted: false,
 };
 
 export { Button };

@@ -27,9 +27,6 @@ const Tabs = TabNavigator(
         },
         IndividualDeckView: {
           screen: IndividualDeckView,
-          navigationOptions: ({ navigation }) => ({
-            headerTitle: navigation.state.params.title,
-          }),
         },
       }),
     },

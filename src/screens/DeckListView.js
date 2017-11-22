@@ -11,9 +11,14 @@ import type { Deck } from '../utils/types';
 const Wrapper = styled.ScrollView``;
 const Text = styled.Text``;
 
+type NavigationState = {
+  params: {},
+};
+
 type Props = {
   decks: { [key: $PropertyType<Deck, 'title'>]: Deck },
   fetchDecks: () => void,
+  navigation: NavigationScreenProp<NavigationState>,
 };
 
 type State = {};
@@ -32,12 +37,19 @@ class DeckListView extends React.Component<Props, State> {
 
   state = {};
 
+  handleCardPress = ({ title }: Deck) => {
+    this.props.navigation.navigate('IndividualDeckView', { title });
+  };
+
   render() {
-    console.log('this.props.decks', this.props.decks);
     return (
       <Wrapper>
         {Object.keys(this.props.decks).map(key => (
-          <Card key={key} {...this.props.decks[key]} />
+          <Card
+            key={key}
+            {...this.props.decks[key]}
+            onPress={() => this.handleCardPress(this.props.decks[key])}
+          />
         ))}
       </Wrapper>
     );
