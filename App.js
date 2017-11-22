@@ -13,43 +13,48 @@ import {
   NewDeckView,
   IndividualDeckView,
   NewQuestionView,
+  QuizView,
 } from './src/screens';
 import reducers from './src/reducers';
 
 import { Color } from './src/utils';
 
-const Tabs = TabNavigator(
-  {
-    DeckListFlow: {
-      screen: StackNavigator({
-        DeckListView: {
-          screen: DeckListView,
-        },
-        IndividualDeckView: {
-          screen: IndividualDeckView,
-        },
-      }),
-    },
-    CreateDeckFlow: {
-      screen: StackNavigator(
-        {
-          NewDeckView: {
-            screen: NewDeckView,
-            navigationOptions: () => ({
-              title: 'New Deck',
-              header: null,
-              headerBackTitle: null,
-            }),
-          },
-          NewQuestionView: {
-            screen: NewQuestionView,
-          },
-        },
-        { headerMode: 'screen' },
-      ),
-    },
+const Tabs = TabNavigator({
+  DeckListFlow: {
+    screen: StackNavigator({
+      DeckListView: {
+        screen: DeckListView,
+      },
+      IndividualDeckView: {
+        screen: IndividualDeckView,
+      },
+      AddCardView: {
+        screen: NewQuestionView,
+      },
+      QuizView: {
+        screen: QuizView,
+      },
+    }),
   },
-);
+  CreateDeckFlow: {
+    screen: StackNavigator(
+      {
+        NewDeckView: {
+          screen: NewDeckView,
+          navigationOptions: () => ({
+            title: 'New Deck',
+            header: null,
+            headerBackTitle: null,
+          }),
+        },
+        NewQuestionView: {
+          screen: NewQuestionView,
+        },
+      },
+      { headerMode: 'screen' },
+    ),
+  },
+});
 
 const middleware = [reduxThunk];
 const store = createStore(
@@ -79,7 +84,9 @@ export default class App extends React.Component<Props, State> {
     return (
       <Provider store={store}>
         <View style={{ flex: 1 }}>
-          <View style={{ height: Constants.statusBarHeight, position: 'relative' }}>
+          <View
+            style={{ height: Constants.statusBarHeight, position: 'relative' }}
+          >
             <StatusBar translucent barStyle="dark-content" />
             <StatusBarBackground />
           </View>

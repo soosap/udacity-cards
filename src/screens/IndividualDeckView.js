@@ -35,6 +35,7 @@ class IndividualDeckView extends React.Component<Props, State> {
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.state.params.title,
+      tabBarVisible: false,
       headerStyle: {
         marginTop: -Constants.statusBarHeight,
       },
@@ -44,6 +45,7 @@ class IndividualDeckView extends React.Component<Props, State> {
   state = {};
 
   render() {
+    const { title } = this.props.navigation.state.params;
     return (
       <Wrapper>
         <Card {...this.props.selectedDeck} />
@@ -51,15 +53,19 @@ class IndividualDeckView extends React.Component<Props, State> {
           <Button
             inverted
             onPress={() => {
-              this.props.navigation.navigate('NewQuestionView', {
-                title: this.props.navigation.state.params.title,
-              });
+              this.props.navigation.navigate('AddCardView', { title });
             }}
           >
             Add Card
           </Button>
         </ButtonWrapper>
-        <Button>Start Quiz</Button>
+        <Button
+          onPress={() => {
+            this.props.navigation.navigate('QuizView', { title });
+          }}
+        >
+          Start Quiz
+        </Button>
       </Wrapper>
     );
   }

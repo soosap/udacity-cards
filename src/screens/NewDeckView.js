@@ -3,7 +3,7 @@ import * as React from 'react';
 import styled from 'styled-components/native';
 import { connect } from 'react-redux';
 
-import { TextInput, Button } from '../components';
+import { TextInput, Button, Headline } from '../components';
 import * as actions from '../actions';
 
 const Wrapper = styled.KeyboardAvoidingView`
@@ -16,12 +16,6 @@ const Wrapper = styled.KeyboardAvoidingView`
 const ButtonWrapper = styled.View`
   margin: 10px;
   margin-top: 30px;
-`;
-
-const Text = styled.Text`
-  font-size: 48px;
-  text-align: center;
-  margin-bottom: 24px;
 `;
 
 type Props = {
@@ -50,7 +44,7 @@ class NewDeckView extends React.Component<Props, State> {
   render() {
     return (
       <Wrapper behavior="padding">
-        <Text>What is the title of your new deck?</Text>
+        <Headline>What is the title of your new deck?</Headline>
         <TextInput
           placeholder="Deck Title"
           onChangeText={text => this.setState({ title: text })}

@@ -1,23 +1,93 @@
 /* @flow */
 import * as React from 'react';
 import styled from 'styled-components/native';
+import { Constants } from 'expo';
+import { connect } from 'react-redux';
 
-const Wrapper = styled.View``;
-const Text = styled.Text``;
+import { Color } from '../utils';
+import { Link, Button, Headline } from '../components';
+import type { Deck } from '../utils/types';
 
-type Props = {};
-type State = {};
+const Wrapper = styled.View`
+  align-items: center;
+  margin-top: 40px;
+`;
+
+type NavigationState = {
+  params: {
+    title: string,
+  },
+};
+
+type Props = {
+  navigation: NavigationScreenProp<NavigationState>,
+  deck: Deck,
+};
+
+type State = {
+  answerRevealed: boolean,
+  activeQuestionIndex: number,
+  correctAnswers: number,
+};
 
 class QuizView extends React.Component<Props, State> {
-  state = {};
+  static navigationOptions = {
+    title: 'Quiz',
+    tabBarVisible: false,
+    headerStyle: {
+      marginTop: -Constants.statusBarHeight,
+    },
+  };
+
+  state = {
+    answerRevealed: false,
+    activeQuestionIndex: 0,
+    correctAnswers: 0,
+  };
+
+  toggleAnswerQuestionLink = () => {
+    this.setState(state => ({
+      answerRevealed: !state.answerRevealed,
+    }));
+  };
+
+  handleAnswer = (answer: boolean) => {
+    console.log('handling answer', answer);
+  };
 
   render() {
+    const card = this.props.deck.questions[this.state.activeQuestionIndex];
     return (
       <Wrapper>
-        <Text>QuizView</Text>
+        <Headline>
+          {this.state.answerRevealed ? card.answer : card.question}
+        </Headline>
+        <Link onPress={this.toggleAnswerQuestionLink}>
+          {this.state.answerRevealed ? 'Question' : 'Answer'}
+        </Link>
+        <Button
+          style={{ width: 125, marginBottom: 10 }}
+          textStyle={{ textAlign: 'center' }}
+          onPress={() => this.handleAnswer(true)}
+          context="success"
+        >
+          Correct
+        </Button>
+        <Button
+          style={{ width: 125 }}
+          textStyle={{ textAlign: 'center' }}
+          onPress={() => this.handleAnswer(false)}
+          context="danger"
+        >
+          Incorrect
+        </Button>
       </Wrapper>
     );
   }
 }
 
-export default QuizView;
+const mapStateToProps = (state, props) => {
+  return { deck: state.decks[props.navigation.state.params.title] };
+};
+
+export default connect(mapStateToProps)(QuizView);
