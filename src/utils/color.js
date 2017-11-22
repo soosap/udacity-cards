@@ -5,4 +5,5 @@ export const Color = {
   DANGER: 'red',
   BLACK: '#000000',
   WHITE: 'white',
+  GRAY: '#919191',
 };

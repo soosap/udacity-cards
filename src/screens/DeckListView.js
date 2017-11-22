@@ -8,7 +8,7 @@ import * as actions from '../actions';
 import { Card } from '../components';
 import type { Deck } from '../utils/types';
 
-const Wrapper = styled.View``;
+const Wrapper = styled.ScrollView``;
 const Text = styled.Text``;
 
 type Props = {
