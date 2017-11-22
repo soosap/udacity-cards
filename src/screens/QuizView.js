@@ -92,7 +92,6 @@ class QuizView extends React.Component<Props, State> {
   render() {
     const card = this.props.deck.questions[this.state.activeQuestionIndex];
     if (!card) return null;
-    console.log('card', card);
     return (
       <Wrapper>
         <Remaining>{`${this.props.deck.questions.length -
