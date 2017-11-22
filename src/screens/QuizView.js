@@ -4,6 +4,7 @@ import * as R from 'ramda';
 import styled from 'styled-components/native';
 import { Constants } from 'expo';
 import { connect } from 'react-redux';
+import { View } from 'react-native';
 
 import { Color } from '../utils';
 import { Link, Button, Headline } from '../components';
@@ -39,13 +40,14 @@ type State = {
 };
 
 class QuizView extends React.Component<Props, State> {
-  static navigationOptions = {
+  static navigationOptions = () => ({
     title: 'Quiz',
     tabBarVisible: false,
+    headerLeft: <View />,
     headerStyle: {
       marginTop: -Constants.statusBarHeight,
     },
-  };
+  });
 
   state = {
     answerRevealed: false,
@@ -69,7 +71,7 @@ class QuizView extends React.Component<Props, State> {
         R.evolve({
           correctAnswers: R.inc,
           activeQuestionIndex: R.inc,
-        })}
+        }),
       );
     } else {
       this.setState(R.evolve({ activeQuestionIndex: R.inc }));
@@ -82,13 +84,14 @@ class QuizView extends React.Component<Props, State> {
           this.state.correctAnswers /
           this.props.deck.questions.length *
           100
-        ).toFixed(2)}%`,
+        ).toFixed(0)}%`,
       });
     }
   };
 
   render() {
     const card = this.props.deck.questions[this.state.activeQuestionIndex];
+    if (!card) return null;
     console.log('card', card);
     return (
       <Wrapper>

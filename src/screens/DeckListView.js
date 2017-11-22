@@ -1,6 +1,7 @@
 /* @flow */
 import * as React from 'react';
 import styled from 'styled-components/native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { Constants } from 'expo';
 
@@ -8,7 +9,9 @@ import * as actions from '../actions';
 import { Card } from '../components';
 import type { Deck } from '../utils/types';
 
-const Wrapper = styled.ScrollView``;
+const Wrapper = styled.ScrollView`
+  margin-top: 10px;
+`;
 const Text = styled.Text``;
 
 type NavigationState = {
@@ -24,12 +27,14 @@ type Props = {
 type State = {};
 
 class DeckListView extends React.Component<Props, State> {
-  static navigationOptions = {
+  static navigationOptions = () => ({
     title: 'Decks',
+    headerBackTitle: null,
+    headerLeft: <View />,
     headerStyle: {
       marginTop: -Constants.statusBarHeight,
     },
-  };
+  });
 
   componentDidMount() {
     this.props.fetchDecks();

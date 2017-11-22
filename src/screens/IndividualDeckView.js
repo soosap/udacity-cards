@@ -10,6 +10,7 @@ import type { Deck } from '../utils/types';
 const Wrapper = styled.View`
   justify-content: center;
   align-items: center;
+  margin-top: 10px;
 `;
 
 const ButtonWrapper = styled.View`
@@ -39,6 +40,7 @@ class IndividualDeckView extends React.Component<Props, State> {
       headerStyle: {
         marginTop: -Constants.statusBarHeight,
       },
+      headerBackTitle: null,
     };
   };
 

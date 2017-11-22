@@ -9,6 +9,7 @@ const Wrapper = styled.TouchableOpacity`
   border: 1px solid ${Color.BLACK};
   height: 150px;
   margin: 10px;
+  margin-top: 0;
   padding: 10px
   border-radius: 3px;
   align-items: center;
