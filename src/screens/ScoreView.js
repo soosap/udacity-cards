@@ -18,6 +18,7 @@ const Text = styled.Text`
 type NavigationState = {
   params: {
     score: string,
+    title: string,
   },
 };
 
@@ -44,6 +45,15 @@ class ScoreView extends React.Component<Props, State> {
       <Wrapper>
         <Text>Your score:</Text>
         <Headline>{this.props.navigation.state.params.score}</Headline>
+        <Button
+          onPress={() => {
+            this.props.navigation.navigate('QuizView', {
+              title: this.props.navigation.state.params.title,
+            });
+          }}
+        >
+          Restart quiz
+        </Button>
         <Button
           inverted
           onPress={() => {

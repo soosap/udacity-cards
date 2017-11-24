@@ -63,11 +63,11 @@ class QuizView extends React.Component<Props, State> {
     );
   };
 
-  handleAnswer = (answer: boolean) => {
+  handleAnswer = async (answer: boolean) => {
     const { activeQuestionIndex } = this.state;
 
     if (answer) {
-      this.setState(
+      await this.setState(
         R.evolve({
           correctAnswers: R.inc,
           activeQuestionIndex: R.inc,
@@ -78,13 +78,12 @@ class QuizView extends React.Component<Props, State> {
     }
 
     if (activeQuestionIndex + 1 === this.props.deck.questions.length) {
+      const score = (this.state.correctAnswers / this.props.deck.questions.length * 100).toFixed(0);
+
       // last question
       this.props.navigation.navigate('ScoreView', {
-        score: `${(
-          this.state.correctAnswers /
-          this.props.deck.questions.length *
-          100
-        ).toFixed(0)}%`,
+        score: `${score}%`,
+        title: this.props.navigation.state.params.title,
       });
 
       clearLocalNotification().then(setLocalNotification());
