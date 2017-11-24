@@ -19,6 +19,7 @@ import {
 import reducers from './src/reducers';
 
 import { Color } from './src/utils';
+import { setLocalNotification } from './src/utils/notification';
 
 const Tabs = TabNavigator({
   DeckListFlow: {
@@ -84,6 +85,10 @@ type Props = {};
 type State = {};
 
 export default class App extends React.Component<Props, State> {
+  componentDidMount() {
+    setLocalNotification();
+  }
+
   render() {
     return (
       <Provider store={store}>

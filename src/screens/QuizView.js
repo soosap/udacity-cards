@@ -6,7 +6,7 @@ import { Constants } from 'expo';
 import { connect } from 'react-redux';
 import { View } from 'react-native';
 
-import { Color } from '../utils';
+import { Color, clearLocalNotification, setLocalNotification } from '../utils';
 import { Link, Button, Headline } from '../components';
 import type { Deck } from '../utils/types';
 
@@ -86,6 +86,8 @@ class QuizView extends React.Component<Props, State> {
           100
         ).toFixed(0)}%`,
       });
+
+      clearLocalNotification().then(setLocalNotification());
     }
   };
 
