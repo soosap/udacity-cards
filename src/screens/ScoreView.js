@@ -57,10 +57,20 @@ class ScoreView extends React.Component<Props, State> {
         <Button
           inverted
           onPress={() => {
+            this.props.navigation.navigate('IndividualDeckView', {
+              title: this.props.navigation.state.params.title,
+            });
+          }}
+        >
+          {`Back to ${this.props.navigation.state.params.title} deck`}
+        </Button>
+        <Button
+          inverted
+          onPress={() => {
             this.props.navigation.navigate('DeckListView');
           }}
         >
-          Back to decks
+          Back to deck list
         </Button>
       </Wrapper>
     );
