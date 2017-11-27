@@ -1,6 +1,7 @@
 /* @flow */
 import * as React from 'react';
 import styled from 'styled-components/native';
+import { Button as PlainButton } from 'react-native';
 import { Constants } from 'expo';
 import { connect } from 'react-redux';
 
@@ -30,13 +31,24 @@ type State = {
 };
 
 class NewQuestionView extends React.Component<Props, State> {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     title: 'Add card',
     tabBarVisible: false,
     headerStyle: {
       marginTop: -Constants.statusBarHeight,
     },
-  };
+    headerLeft: (
+      <Button
+        onPress={() => {
+          navigation.navigate('IndividualDeckView', {
+            title: navigation.state.params.title,
+          });
+        }}
+      >
+        Back
+      </Button>
+    ),
+  });
 
   state = {
     question: '',
